@@ -1,4 +1,9 @@
-# 柏宝绘 · SillyTavern 剧情配图助手
+# 柏宝绘 · SillyTavern 剧情配图助手（二次开发版）
+
+> **本仓库是基于原作者“柏柏”的 [ST-BaiBai-Image](https://github.com/baibai-git/ST-BaiBai-Image) 所做的非官方二次开发。** 原版设计、名称和主要功能归原作者；此 Fork 由 [alensstream-dotcom](https://github.com/alensstream-dotcom) 维护，非原作者官方版本。修改及验证说明见 [FORK_NOTES.md](./FORK_NOTES.md)。
+
+> 注意：原仓库截至本次 Fork 时未发现独立 LICENSE 文件；这里的来源署名不代表取得任何超出原作者授权范围的再发布许可。
+
 
 > 让 AI 的每一段精彩剧情都有画面。柏宝绘会一边陪你聊，一边默默判断「这一幕值不值得画」，自动挑选最值得定格的瞬间、写好生图提示词，再交给出图渠道生成图片，直接嵌进楼层里。全程自动，也可随时手动接管。
 
