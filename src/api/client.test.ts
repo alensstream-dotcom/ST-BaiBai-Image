@@ -320,7 +320,7 @@ describe('upstream finish metadata', () => {
       'data: {"choices":[{"delta":{"content":"hello"}}]}',
       'data: {"choices":[{"delta":{},"finish_reason":"stop","native_finish_reason":"eos"}]}',
       'data: [DONE]', '',
-    ].join('\\n');
+    ].join('\n');
     expect(await readSseContent(sseResponse(stream), meta)).toBe('hello');
     expect(meta).toEqual({ finishReason: 'stop', nativeFinishReason: 'eos' });
   });
