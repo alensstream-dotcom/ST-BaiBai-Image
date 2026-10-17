@@ -244,3 +244,41 @@ describe('内置画师串(bi_*)与新老用户', () => {
     expect(settings.nai.activeArtistId).toBe('');
   });
 });
+
+describe('一键采用 NAI 剧情预设', () => {
+  beforeEach(() => {
+    vi.resetModules();
+    vi.stubGlobal('toastr', { info: vi.fn(), success: vi.fn(), error: vi.fn() });
+    vi.stubGlobal('window', { addEventListener: vi.fn(), dispatchEvent: vi.fn() });
+  });
+
+  it('replaces only custom NAI prompt overrides and artist selection', async () => {
+    const settings = await hydrateWithNai({
+      activeArtistId: 'art_old',
+      artistPresets: [{ id: 'art_old', name: '旧画风', prompt: 'artist:old', quality: '', negative: '' }],
+      model: 'nai-diffusion-5-full',
+      qualityTags: 'keep channel quality',
+      undesiredContent: 'keep channel negative',
+    });
+    settings.autoTag.prompts.naiV5Spec = '先前自行粘贴的 NAI 规范';
+    settings.autoTag.prompts.naiV5Thinking = '先前自行粘贴的思维链';
+    settings.autoTag.prompts.comfySpec = 'do not change';
+    settings.autoTag.minImages = 2;
+    const { applyRecommendedNaiScenePreset, DEFAULT_NAI_V5_SPEC, DEFAULT_NAI_V5_THINKING } =
+      await import('@/state/settings');
+    const { NAI_STORY_ARTIST_ID, naiQualityTags, naiUndesiredContent, NAI_STORY_NEGATIVE } =
+      await import('@/backends/nai');
+    applyRecommendedNaiScenePreset();
+    expect(settings.nai.activeArtistId).toBe(NAI_STORY_ARTIST_ID);
+    expect(settings.autoTag.prompts.naiV5Spec).toBe('');
+    expect(settings.autoTag.prompts.naiV5Thinking).toBe('');
+    expect(DEFAULT_NAI_V5_SPEC).toContain('Narrative framing and rating fidelity');
+    expect(DEFAULT_NAI_V5_THINKING).toContain('主镜头');
+    expect(naiQualityTags(settings.nai)).not.toBe('keep channel quality');
+    expect(naiUndesiredContent(settings.nai)).toBe(NAI_STORY_NEGATIVE);
+    expect(settings.autoTag.prompts.comfySpec).toBe('do not change');
+    expect(settings.autoTag.minImages).toBe(2);
+    expect(settings.nai.model).toBe('nai-diffusion-5-full');
+    expect(settings.nai.artistPresets[0].id).toBe('art_old');
+  });
+});
