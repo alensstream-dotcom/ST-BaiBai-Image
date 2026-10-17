@@ -255,7 +255,7 @@ export interface NaiGenerateValues {
  * - id 用 bi_ 前缀(用户条目恒为 art_*),永不与用户库相撞;
  * - 只读:面板不给改名/删除,要自定义走「复制」建成用户条目再改;
  * - quality/negative 与用户条目同一条回落链,留空 = 跟随渠道级;
- * - 新用户默认选中第一条(见 settings.ts 的 naiDefaults);老用户的
+ * - 新用户使用 naiDefaults 指定的内置条目;老用户的
  *   activeArtistId 存在 settings 里,不受这里影响;
  * - 要下线某条内置配方,至少留一个版本再删:正选中它的用户会走既有
  *   「id 悬空 → 清成不使用」逻辑,画风静默变掉,需慎重。
@@ -271,20 +271,20 @@ export const NAI_STORY_NEGATIVE =
 
 export const BUILTIN_NAI_ARTISTS: readonly NaiArtistPreset[] = [
   {
-    id: NAI_STORY_ARTIST_ID,
-    name: '剧情原味·电影感半写实（二创推荐）',
-    prompt:
-      '1.5::semi-realistic anime::, 1.35::cinematic illustration::, year 2025, year 2026, 1.2::artist:kurono_mitsuki::, 1.1::artist:ahonoko::, 0.7::artist:ogipote::, 1.2::artist:zhiyan_li::, 1.05::artist:boninit::, 0.75::artist:kyokucho::, 0.58::artist:nixeu::, 0.9::artist:inoue_kiyoshirou::, 0.7::artist:ogre_(illustogre)::, canvas (medium), 1.28::blender (medium)::',
-    quality: NAI_STORY_POSITIVE_QUALITY,
-    negative: NAI_STORY_NEGATIVE,
-  },
-  {
     id: 'bi_default',
     name: '默认画师串',
     prompt:
       '0.8::nnmbpx::,0.8::artist:yalmyu::,0.1::smilesmile1312,::,  artist:sh_(shinh), 0.4::chen bin::,0.4::dayama::,healthyman,bacheally,',
     quality: '',
     negative: '',
+  },
+  {
+    id: NAI_STORY_ARTIST_ID,
+    name: '剧情原味·电影感半写实（二创推荐）',
+    prompt:
+      '1.5::semi-realistic anime::, 1.35::cinematic illustration::, year 2025, year 2026, 1.2::artist:kurono_mitsuki::, 1.1::artist:ahonoko::, 0.7::artist:ogipote::, 1.2::artist:zhiyan_li::, 1.05::artist:boninit::, 0.75::artist:kyokucho::, 0.58::artist:nixeu::, 0.9::artist:inoue_kiyoshirou::, 0.7::artist:ogre_(illustogre)::, canvas (medium), 1.28::blender (medium)::',
+    quality: NAI_STORY_POSITIVE_QUALITY,
+    negative: NAI_STORY_NEGATIVE,
   },
 ];
 
