@@ -208,7 +208,7 @@ describe('内置画师串(bi_*)与新老用户', () => {
     vi.stubGlobal('window', { addEventListener: vi.fn(), dispatchEvent: vi.fn() });
   });
 
-  it('全新安装(没有任何已存设置)→ 默认启用内置「默认画师串」', async () => {
+  it('全新安装(没有任何已存设置)→ 默认启用二创剧情配方', async () => {
     // 默认只在这条路径生效:stored 整个不存在时,模块级默认值直接被写进 extension_settings。
     mocks.context = {
       extensionSettings: {},
@@ -216,7 +216,7 @@ describe('内置画师串(bi_*)与新老用户', () => {
     };
     const { hydrateSettings, settings } = await import('@/state/settings');
     await hydrateSettings();
-    expect(settings.nai.activeArtistId).toBe('bi_default');
+    expect(settings.nai.activeArtistId).toBe('bi_story_cinematic');
     expect(settings.nai.artistPresets).toEqual([]); // 用户库仍为空:内置条不进 settings
   });
 
@@ -273,7 +273,7 @@ describe('一键采用 NAI 剧情预设', () => {
     expect(settings.autoTag.prompts.naiV5Spec).toBe('');
     expect(settings.autoTag.prompts.naiV5Thinking).toBe('');
     expect(DEFAULT_NAI_V5_SPEC).toContain('Narrative framing and rating fidelity');
-    expect(DEFAULT_NAI_V5_THINKING).toContain('主镜头');
+    expect(DEFAULT_NAI_V5_THINKING).toContain('镜头归属');
     expect(naiQualityTags(settings.nai)).not.toBe('keep channel quality');
     expect(naiUndesiredContent(settings.nai)).toBe(NAI_STORY_NEGATIVE);
     expect(settings.autoTag.prompts.comfySpec).toBe('do not change');
