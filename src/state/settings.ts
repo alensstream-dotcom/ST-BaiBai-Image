@@ -1171,10 +1171,10 @@ function naiDefaults(): NaiSettings {
     // 用户库为空:库里只有用户自己建的配方,官方推荐的那条是内置只读条目
     // (BUILTIN_NAI_ARTISTS),不进 settings。
     artistPresets: [],
-    // 新装用户默认启用内置「默认画师串」——默认值只在这条路径生效:
+    // 新装用户默认启用二创剧情画风——仅在这条路径生效:
     // hydrate 时旧用户的 stored.nai.activeArtistId 已存在(哪怕空串),会被
     // normalizeNai 原样保留,不受影响。
-    activeArtistId: BUILTIN_NAI_ARTISTS[0]?.id ?? '',
+    activeArtistId: NAI_STORY_ARTIST_ID,
     naturalLanguage: true,
     orientationLock: 'auto',
   };
