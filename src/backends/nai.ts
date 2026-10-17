@@ -260,7 +260,24 @@ export interface NaiGenerateValues {
  * - 要下线某条内置配方,至少留一个版本再删:正选中它的用户会走既有
  *   「id 悬空 → 清成不使用」逻辑,画风静默变掉,需慎重。
  */
+/** Built-in narrative preset, selectable without overwriting old user-created artist presets. */
+export const NAI_STORY_ARTIST_ID = 'bi_story_cinematic';
+
+export const NAI_STORY_POSITIVE_QUALITY =
+  '1.2::masterpiece, best quality, amazing quality, very aesthetic::, {ultra-detailed, absurdres}, 1.1::clean lineart, sharp lineart, ultra fine lineart, delicate linework, detailed linework, variable line weight::, 1.12::detailed face, detailed eyes, expressive eyes::, 1.32::detailed skin, realistic skin texture, natural skin texture, smooth skin::, soft skin glow, soft shading, gentle shading, 0.25::rim lighting::';
+
+export const NAI_STORY_NEGATIVE =
+  'lowres, worst quality, low quality, bad quality, normal quality, jpeg artifacts, compression artifacts, blurry, out of focus, scan artifacts, unfinished, incomplete, upscaled, interpolated, text, logo, watermark, signature, username, bad anatomy, distorted anatomy, anatomical errors, bad proportions, bad limb, bad legs, bad feet, bad hands, mutated hands, extra fingers, missing fingers, fused fingers, extra limbs, missing limbs, mutation, deformed, disfigured, fused body, deformed face, asymmetrical face, deformed eyes, bad eyes, blank eyes, cloudy eyes, cross-eyed, lazy eye, uneven eyes, low detail eyes, unnatural pupils, unnatural hair, messy lines, sketch lines, rough lines, style mix, artist collaboration, mixed styles, inconsistent style, conflicting styles, bad composition, distorted composition, bad perspective, multiple views, split screen, animation error, chromatic aberration, vertical banding, moire pattern, halftone, dithering, screentones, monochrome, greyscale, variant set, character sheet, turnaround, reference sheet, comic, toon, chibi, dated, 1990s (style), neck abnormality, long neck';
+
 export const BUILTIN_NAI_ARTISTS: readonly NaiArtistPreset[] = [
+  {
+    id: NAI_STORY_ARTIST_ID,
+    name: '剧情原味·电影感半写实（二创推荐）',
+    prompt:
+      '1.5::semi-realistic anime::, 1.35::cinematic illustration::, year 2025, year 2026, 1.2::artist:kurono_mitsuki::, 1.1::artist:ahonoko::, 0.7::artist:ogipote::, 1.2::artist:zhiyan_li::, 1.05::artist:boninit::, 0.75::artist:kyokucho::, 0.58::artist:nixeu::, 0.9::artist:inoue_kiyoshirou::, 0.7::artist:ogre_(illustogre)::, canvas (medium), 1.28::blender (medium)::',
+    quality: NAI_STORY_POSITIVE_QUALITY,
+    negative: NAI_STORY_NEGATIVE,
+  },
   {
     id: 'bi_default',
     name: '默认画师串',
